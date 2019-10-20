@@ -5,7 +5,7 @@ log=asciidoctor.log
 book_name=cyborg-developer-cookbook
 book_name_asc=$book_name.asc
 
-version=1.0
+version=${1:-development}
 
 revdate=$(date '+%Y-%m-%d')
 params="--attribute revnumber=$version --attribute revdate=$revdate -D $release_folder"

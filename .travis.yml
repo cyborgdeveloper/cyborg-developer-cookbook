@@ -1,0 +1,44 @@
+language: ruby
+sudo: required
+
+env:
+  global:
+    secure: WcWUvOFPfB3sMTxKrU+nSyKcWSI+ej/XH0H2AxmYgx7TtzqT8hHRY3lLmrNr1UMiM2MagJh/VxxhRBX+tIgN4vMwIzANuKY/w/0CZpeoGna9ImW4MgTlmjzQ53TY7R2qSc+ZUNYoM2GWcPGzh1KWX/Hy/n2kWsLtc4zho3BOKyb3SBHlca1wCWI6/GEYPFOOvEqmLKP86hpWJMcYogjYlZ7ecsBKTITeVg4doHQZkBLmtRGRCJX8Z927gWkDmzAou02Y+bvWNcYV4qj8fq8YkDR3L5XbLMpNeMVsxjZsGmSt4/BkexRLhzQPcs3HJUXUy5DIS4vrCfGYSEKMes97k3zrl2Xazr27wtfgiGASCaOWiUvQiWFIl4hiY52bBywYZQeNaHgSfujG5VoJkrxlq4frZKT47JMKrWNei3Z7agv7P0NG9UX3ThNnTrWDC5oSdF3XxeJuY97+Yj1j8+yIdJYnj5tpcljv0G4Bjp1GKFTVRyCa6YZNdtr9qtSnrfPWLfCH7DjVDkx09+otyORLswvauXTXoUUOY/dsQdQOxJX3R1Ef1bcxy2gMGIqi1++juj5KMUTl0Ax4J5yoLnVrlCkOPer9PiSJdsOSaAjSuUIUrU0fR0sd/cY4YSSUyuszaCDaYsL6lQs8BchwNFgu22Cbs6nrzbyewGYHBD9ZpfI=
+
+jobs:
+  include:
+    - stage: "Semantic Release"
+      name: "Generate a new release and changelogs"
+      language: node_js
+      node_js: lts/*
+      os:
+        - linux
+      install:
+        - npm install
+      script: skip
+      deploy:
+        provider: script
+        api_key: "$GITHUB_TOKEN"
+        node_js: lts/*
+        skip_cleanup: true
+        script: npx semantic-release
+        on:
+          branch: master
+
+    - stage: "GitHub Release"
+      name: "Send the generated files to the new GitHub release"
+      services:
+        - docker
+      env:
+        - COMPOSE_FILE=docker-compose.yml
+      script:
+        - TRAVIS_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
+        - docker-compose run --rm ebook $TRAVIS_TAG
+      deploy:
+        provider: releases
+        api_key: "$GITHUB_TOKEN"
+        file_glob: true
+        file: dist/*
+        skip_cleanup: true
+        on:
+          branch: master

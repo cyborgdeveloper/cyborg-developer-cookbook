@@ -4,3 +4,14 @@ asciidoctor.log
 ### OSX ###
 *.DS_Store
 ._*
+
+### NODE.JS ###
+node_modules*
+npm-debug.log
+yarn.lock
+
+# ignores local travis config folder
+.travis
+
+### others ###
+.vscode
