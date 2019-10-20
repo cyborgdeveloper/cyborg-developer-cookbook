@@ -12,5 +12,5 @@ services:
     image: asciidoctor/docker-asciidoctor
     volumes:
       - .:/documents/
-    command: ./asc-startup.sh
+    entrypoint: ./asc-startup.sh
     network_mode: bridge
