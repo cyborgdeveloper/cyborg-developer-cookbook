@@ -1,5 +1,5 @@
-book-output
-book-release*
+dist
+asciidoctor.log
 
 ### OSX ###
 *.DS_Store
