@@ -30,3 +30,7 @@ printf " -- Mobi output at $book_name.mobi\n"
 printf "Converting to PDF... (this one takes a while)\n"
 asciidoctor-pdf $params $book_name_asc 2>/dev/null >> $log
 printf " -- PDF  output at $book_name.pdf\n"
+
+printf "Converting to PDF (toc with 3 levels)... (this one takes a while again)\n"
+asciidoctor-pdf $params -a toclevels=3 -o $book_name-detailed-toc.pdf $book_name_asc 2>/dev/null >> $log
+printf " -- PDF  output at $book_name-detailed-toc.pdf\n"
