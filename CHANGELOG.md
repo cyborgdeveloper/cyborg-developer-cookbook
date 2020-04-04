@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/cyborgdeveloper/cyborg-developer-cookbook/compare/v1.1.0...v1.1.1) (2020-04-04)
+
+
+### Bug Fixes
+
+* **recipe:** 🐛 remove gitignore file from jenkins example ([8f89a36](https://github.com/cyborgdeveloper/cyborg-developer-cookbook/commit/8f89a3658162b22c5f393d8c2aed266ea7187df8))
+
 # [1.1.0](https://github.com/cyborgdeveloper/cyborg-developer-cookbook/compare/v1.0.0...v1.1.0) (2019-10-29)
 
 
