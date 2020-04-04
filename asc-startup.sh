@@ -25,7 +25,9 @@ printf " -- Epub output at $book_name.epub\n"
 
 printf "Converting to Mobi (kf8)...\n"
 asciidoctor-epub3 $params -a ebook-format=kf8 $book_name_asc >> $log
+printf " -- Mobi output at $book_name-kf8.epub\n"
 printf " -- Mobi output at $book_name.mobi\n"
+printf " -- Mobi output at $book_name.mobi8\n"
 
 printf "Converting to PDF... (this one takes a while)\n"
 asciidoctor-pdf $params $book_name_asc 2>/dev/null >> $log
