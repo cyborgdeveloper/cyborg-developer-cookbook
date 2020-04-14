@@ -9,7 +9,7 @@ services:
     network_mode: bridge
 
   ebook:
-    image: asciidoctor/docker-asciidoctor
+    image: asciidoctor/docker-asciidoctor:1.1.0
     volumes:
       - .:/documents/
     entrypoint: ./asc-startup.sh
